@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Type Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #15b0da;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            background-color:#fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Data Type Finder</h1>
+        <br>
+        <label for="userInput">Enter an input:</label>
+        <input type="text" id="userInput">
+        <button onclick="checkDataType()">Find Data Type</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function checkDataType() {
+            var userInput = document.getElementById("userInput").value;
+
+            if (!isNaN(userInput)) {
+                if (Number.isInteger(parseFloat(userInput))) {
+                    document.getElementById("result").innerText = "Data type of the input is: integer";
+                } else {
+                    document.getElementById("result").innerText = "Data type of the input is: float";
+                }
+            } else if (userInput.toLowerCase() === 'true' || userInput.toLowerCase() === 'false') {
+                document.getElementById("result").innerText = "Data type of the input is: boolean";
+            } else {
+                document.getElementById("result").innerText = "Data type of the input is: string";
+            }
+        }
+    </script>
+</body>
+</html>
