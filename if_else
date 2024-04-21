@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Eligibility Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e70707;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #e70707;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #e70707;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color:#e70707;
+        }
+
+        #result {
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Exam Eligibility Checker</h1>
+
+        <label for="nameInput">Enter your name:</label>
+        <input type="text" id="nameInput">
+
+        <label for="courseInput">Enter your course:</label>
+        <input type="text" id="courseInput">
+
+        <label for="registerNumberInput">Enter your register number:</label>
+        <input type="text" id="registerNumberInput">
+
+        <label for="attendanceInput">Enter your attendance percentage:</label>
+        <input type="number" id="attendanceInput" min="0" max="100">
+
+        <button onclick="checkEligibility()">Check Eligibility</button>
+
+        <p id="result"></p>
+
+        <script>
+            function checkEligibility() {
+                var name = document.getElementById("nameInput").value;
+                var course = document.getElementById("courseInput").value;
+                var registerNumber = document.getElementById("registerNumberInput").value;
+                var attendancePercentage = document.getElementById("attendanceInput").value;
+
+                if (attendancePercentage >= 60) {
+                    document.getElementById("result").innerText = "Congratulations, " + name + "! You are eligible for the exam.";
+                } else {
+                    document.getElementById("result").innerText = "Sorry, " + name + ". You are not eligible for the exam due to low attendance percentage.";
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
