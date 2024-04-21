@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexical Scoping: Nested Functions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: purple;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-family:Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: purple;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color:purple;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color:black;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+
+        #output p {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <div class = "container">
+    <h1>Lexical Scoping: Nested Functions</h1>
+
+    <label for="lengthInput">Enter the length of the rectangle:</label>
+    <input type="number" id="lengthInput"><br><br><br>
+
+    <label for="widthInput">Enter the width of the rectangle:</label>
+    <input type="number" id="widthInput"><br><br><br>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <p id="output"></p>
+    </center>
+
+    <script>
+        function calculate() {
+            
+            var length = parseFloat(document.getElementById("lengthInput").value);
+            var width = parseFloat(document.getElementById("widthInput").value);
+
+            
+            function calculateArea() {
+                return length * width;
+            }
+
+           
+            function calculatePerimeter() {
+                return 2 * (length + width);
+            }
+
+            
+            var area = calculateArea();
+            var perimeter = calculatePerimeter();
+
+           
+            var output = "Area of the rectangle: " + area + "<br>";
+            output += "Perimeter of the rectangle: " + perimeter;
+            document.getElementById("output").innerHTML = output;
+        }
+    </script>
+</body>
+</html>
