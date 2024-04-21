@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input and Concatenation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #15b0da;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #messageOutput {
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Input and Concatenation</h1>
+
+        <label for="nameInput">Enter your name:</label>
+        <input type="text" id="nameInput">
+
+        <label for="ageInput">Enter your age:</label>
+        <input type="number" id="ageInput">
+
+        <label for="cityInput">Enter your city:</label>
+        <input type="text" id="cityInput">
+
+        <label for="courseInput">Enter your course:</label>
+        <input type="text" id="courseInput">
+
+        <label for="departmentInput">Enter your department:</label>
+        <input type="text" id="departmentInput">
+
+        <label for="sectionInput">Enter your section:</label>
+        <input type="text" id="sectionInput">
+
+        <button onclick="generateMessage()">Generate Message</button>
+
+        <p id="messageOutput"></p>
+
+        <script>
+            function generateMessage() {
+                
+                var name = document.getElementById("nameInput").value;
+                var age = document.getElementById("ageInput").value;
+                var city = document.getElementById("cityInput").value;
+                var course = document.getElementById("courseInput").value;
+                var department = document.getElementById("departmentInput").value;
+                var section = document.getElementById("sectionInput").value;
+
+                
+                var message = "Hello, my name is " + name + ", I am " + age + " years old, and I live in " + city + ". ";
+                message += "I am studying " + course + " in the " + department + " department with section " + section + ".";
+
+                
+                document.getElementById("messageOutput").innerText = message;
+            }
+        </script>
+    </div>
+</body>
+</html>
