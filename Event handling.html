@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 60px;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.7s;
+        }
+        button:hover {
+            background-color: #17ed37;
+        }
+        #message {
+            margin-top: 20px;
+        }
+        #passwordStrengthBar {
+            width: 100%;
+            height: 20px;
+            background-color: #eee;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        #passwordStrength {
+            height: 100%;
+            background-color: #17ed37;
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+        #passwordPercentage {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <h1>Registration Form</h1>
+        <form id="registrationForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username..." required>
+            <label for="email">Email:</label>
+            <input type="text" id="email" placeholder="Enter your email..." required>
+            <label for="mobile">Mobile Number:</label>
+            <input type="text" id="mobile" placeholder="Enter your mobile number..." required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password..." required>
+            <div id="passwordStrengthBar">
+                <div id="passwordStrength"></div>
+                <div id="passwordPercentage">0%</div>
+            </div>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm your password..." required>
+            <button type="submit">Register</button>
+        </form>
+        <div id="message"></div>
+    </div>
+    <script>
+       
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var mobile = document.getElementById("mobile").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (username.trim() === "" || email.trim() === "" || mobile.trim() === "" || password.trim() === "" || confirmPassword.trim() === "") {
+                document.getElementById("message").innerText = "Please fill in all fields.";
+            } else if (!validateEmail(email)) {
+                document.getElementById("message").innerText = "Please enter a valid email address.";
+            } else if (!validateMobile(mobile)) {
+                document.getElementById("message").innerText = "Please enter a valid 10-digit mobile number.";
+            } else if (!validatePasswordStrength(password)) {
+                document.getElementById("message").innerText = "Password must contain uppercase letters, special characters, and numbers.";
+            } else if (password !== confirmPassword) {
+                document.getElementById("message").innerText = "Passwords do not match.";
+            } else {
+                document.getElementById("message").innerText = "Registration successful!";
+            }
+        });
+
+        
+        function validateEmail(email) {
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+       
+        function validateMobile(mobile) {
+            var mobileRegex = /^\d{10}$/;
+            return mobileRegex.test(mobile);
+        }
+
+        
+        function validatePasswordStrength(password) {
+            
+            var uppercaseRegex = /[A-Z]/;
+            var specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+            var numberRegex = /[0-9]/;
+
+            return uppercaseRegex.test(password) && specialCharRegex.test(password) && numberRegex.test(password);
+        }
+
+        
+        var passwordInput = document.getElementById("password");
+        var passwordStrengthBar = document.getElementById("passwordStrength");
+        var passwordPercentage = document.getElementById("passwordPercentage");
+
+        passwordInput.addEventListener("input", function() {
+            var password = passwordInput.value;
+            var strength = 0;
+
+            
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+
+            
+            var width = (strength / 3) * 100;
+            passwordStrengthBar.style.width = width + "%";
+
+            
+            passwordPercentage.textContent = Math.round(width) + "%";
+        });
+
+        
+        var container = document.getElementById("container");
+        var topPosition = 50;
+        var leftPosition = 50;
+
+        document.addEventListener("keydown", function(event) {
+            switch(event.key) {
+                case "ArrowUp":
+                    topPosition -= 10;
+                    container.style.top = topPosition + "px";
+                    break;
+                case "ArrowDown":
+                    topPosition += 10;
+                    container.style.top = topPosition + "px";
+                    break;
+                case "ArrowLeft":
+                    leftPosition -= 10;
+                    container.style.left = leftPosition + "px";
+                    break;
+                case "ArrowRight":
+                    leftPosition += 10;
+                    container.style.left = leftPosition + "px";
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
