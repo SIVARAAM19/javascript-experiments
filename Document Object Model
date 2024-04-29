@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: purple;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: purple;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: purple;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: black;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+
+        #output p {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FITNESS GUIDE</h1>
+        <label for="taskInput">Activity to do:</label>
+        <input type="text" id="taskInput" placeholder="Enter a new task">
+        <label for="positionInput">Enter position to be inserted or replaced:</label>
+        <input type="number" id="positionInput" placeholder="Enter position (starting from 1)">
+        <button onclick="addTask()">Add/Replace Task</button>
+        <ul id="taskList">
+            <li onclick="toggleTask(this)">Drink 4l of water</li>
+            <li onclick="toggleTask(this)">Take 500g of carbohydrates</li>
+            <li onclick="toggleTask(this)">Take 200g of protein</li>
+            <li onclick="toggleTask(this)">Drink 500ml caffeine</li>
+            <li onclick="toggleTask(this)">Bowl of nuts</li>
+            <li onclick="toggleTask(this)">Take 100g of fats</li>
+        </ul>
+        <label for="hideShowPositionInput">Enter position to hide/show task:</label>
+        <input type="number" id="hideShowPositionInput" placeholder="Enter position">
+        <button onclick="hideTask()">Hide Task</button>
+        <button onclick="showTask()">Show Task</button>
+    </div>
+    <script>
+        
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskList = document.getElementById("taskList");
+            var positionInput = document.getElementById("positionInput");
+            var position = parseInt(positionInput.value);
+            var existingTask = taskList.children[position - 1];
+
+            if (taskInput.value !== "" && !isNaN(position) && position > 0) {
+                if (existingTask) {
+                    
+                    existingTask.innerText = taskInput.value;
+                } else {
+                    
+                    var newTask = document.createElement("li");
+                    newTask.innerText = taskInput.value;
+                    taskList.insertBefore(newTask, taskList.children[position - 1]);
+                }
+                taskInput.value = ""; 
+                positionInput.value = ""; 
+            } else {
+                alert("Please enter a valid position.");
+            }
+        }
+
+        function hideTask() {
+            var hideShowPositionInput = document.getElementById("hideShowPositionInput");
+            var hideShowPosition = parseInt(hideShowPositionInput.value);
+            var taskList = document.getElementById("taskList");
+            var task = taskList.children[hideShowPosition - 1];
+
+            if (!isNaN(hideShowPosition) && hideShowPosition > 0 && task) {
+                task.style.display = "none";
+                hideShowPositionInput.value = ""; 
+            } else {
+                alert("Please enter a valid position.");
+            }
+        }
+
+        
+        function showTask() {
+            var hideShowPositionInput = document.getElementById("hideShowPositionInput");
+            var hideShowPosition = parseInt(hideShowPositionInput.value);
+            var taskList = document.getElementById("taskList");
+            var task = taskList.children[hideShowPosition - 1];
+
+            if (!isNaN(hideShowPosition) && hideShowPosition > 0 && task) {
+                task.style.display = "list-item";
+                hideShowPositionInput.value = ""; 
+            } else {
+                alert("Please enter a valid position.");
+            }
+        }
+    </script>
+</body>
+</html>
